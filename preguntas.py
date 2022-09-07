@@ -74,8 +74,8 @@ def pregunta_04():
     Name: _c2, dtype: float64
     """
 
-    
-    return
+    respuesta= tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.mean,})
+    return respuesta
 
 
 def pregunta_05():
@@ -92,7 +92,8 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    respuesta=tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.max,})
+    return respuesta
 
 
 def pregunta_06():
@@ -104,6 +105,7 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
+    
     return
 
 

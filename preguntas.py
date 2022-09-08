@@ -161,8 +161,9 @@ def pregunta_08():
 
 def pregunta_09():
 
-    fecha_edit=list(dict(tbl0._c3).values())
-    fecha_edit = [line.split("-") for line in fecha_edit]
+    fecha=tbl0._c3
+    fecha=list(dict(fecha).values())
+    fecha_edit = [line.split("-") for line in fecha]
     fecha_edit = [row[:1] for row in fecha_edit]
     respuesta=tbl0.assign(year=fecha_edit)
     respuesta = respuesta.squeeze()

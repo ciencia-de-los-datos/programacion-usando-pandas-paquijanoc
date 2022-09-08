@@ -187,6 +187,29 @@ def pregunta_09():
 
 def pregunta_10():
 
+    letter=list(tbl0._c1)
+    number=list(tbl0._c2)
+
+    union =zip(letter,number)
+    union=list(union)
+
+    prueba=[]
+    rta=[(k, prueba.append([y for (x,y) in union if x == k])) for k in dict(union).keys()]
+    letras= [row[0] for row in rta]
+    prueba2=[]
+    for item in prueba:
+      x = sorted(list(item))
+      prueba2.append(x)
+    prueba3=[]
+    for item in prueba2:
+      x = ":".join(map(str, item))
+      prueba3.append(x)
+
+    df1 = pd.DataFrame({"_c0": letras, "_c1": prueba3})
+    respuesta=df1.sort_values(by=["_c0"],ascending=[True],)
+
+
+
     """
     Construya una tabla que contenga _c1 y una lista separada por ':' de los valores de
     la columna _c2 para el archivo `tbl0.tsv`.
@@ -200,7 +223,7 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    return respuesta
 
 
 def pregunta_11():
@@ -241,6 +264,9 @@ def pregunta_12():
 
 
 def pregunta_13():
+
+
+
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
     suma de tbl2._c5b por cada valor en tbl0._c1.

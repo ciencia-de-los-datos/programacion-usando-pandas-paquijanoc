@@ -140,6 +140,7 @@ def pregunta_07():
 
 
 def pregunta_08():
+    respuesta=tbl0.assign(suma0=tbl0._c0 + tbl0._c2)
     """
     Agregue una columna llamada `suma` con la suma de _c0 y _c2 al archivo `tbl0.tsv`.
 
@@ -154,7 +155,7 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    return respuesta
 
 
 def pregunta_09():

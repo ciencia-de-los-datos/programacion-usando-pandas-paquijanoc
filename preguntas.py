@@ -161,6 +161,12 @@ def pregunta_08():
 
 def pregunta_09():
 
+    fecha_edit=list(dict(tbl0._c3).values())
+    fecha_edit = [line.split("-") for line in fecha_edit]
+    fecha_edit = [row[:1] for row in fecha_edit]
+    respuesta=tbl0.assign(year=fecha_edit)
+    
+
 
     """
     Agregue el año como una columna al archivo `tbl0.tsv`.
@@ -176,7 +182,7 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    return respuesta
 
 
 def pregunta_10():

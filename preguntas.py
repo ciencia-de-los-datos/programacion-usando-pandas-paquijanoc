@@ -208,7 +208,7 @@ def pregunta_10():
 
     respuesta = pd.DataFrame({"_c1": letras, "_c2": prueba3})
 
-
+    respuesta.set_index(['_c1'], inplace = True)
 
     """
     Construya una tabla que contenga _c1 y una lista separada por ':' de los valores de
@@ -227,6 +227,9 @@ def pregunta_10():
 
 
 def pregunta_11():
+
+
+
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
     la columna _c4 del archivo `tbl1.tsv`.

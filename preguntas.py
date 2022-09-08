@@ -101,6 +101,13 @@ def pregunta_05():
 
 
 def pregunta_06():
+
+    tbl1=tbl1.groupby('_c4').size()
+    diccio=dict(tbl1)
+    lista1=list(diccio.keys())
+    listaMayusc = [x.upper() for x in lista1]
+    listaMayusc.sort()
+    respuesta=listaMayusc
     """
     Retorne una lista con los valores unicos de la columna _c4 de del archivo `tbl1.csv`
     en mayusculas y ordenados alfabéticamente.
@@ -110,10 +117,12 @@ def pregunta_06():
 
     """
 
-    return
+    return respuesta
 
 
 def pregunta_07():
+    x=tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.sum,})
+    respuesta = x.squeeze()
     """
     Calcule la suma de la _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
 
@@ -126,7 +135,8 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return
+
+    return respuesta
 
 
 def pregunta_08():

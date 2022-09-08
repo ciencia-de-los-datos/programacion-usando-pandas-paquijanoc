@@ -102,8 +102,8 @@ def pregunta_05():
 
 def pregunta_06():
 
-    tbl1=tbl1.groupby('_c4').size()
-    diccio=dict(tbl1)
+    tabla1=tbl1.groupby('_c4').size()
+    diccio=dict(tabla1)
     lista1=list(diccio.keys())
     listaMayusc = [x.upper() for x in lista1]
     listaMayusc.sort()

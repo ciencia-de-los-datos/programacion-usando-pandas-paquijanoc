@@ -329,6 +329,13 @@ def pregunta_12():
 
 def pregunta_13():
 
+    suma=tbl2.groupby("_c0", as_index=True,).agg({"_c5b": np.sum,})
+
+    tablanew=tbl0.assign(_c5b=suma)
+
+    x=tablanew.groupby("_c1", as_index=True,).agg({"_c5b": np.sum,})
+    respuesta = x.squeeze()
+
 
 
     """
@@ -344,4 +351,4 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    return respuesta

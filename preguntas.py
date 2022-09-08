@@ -228,6 +228,27 @@ def pregunta_10():
 
 def pregunta_11():
 
+    number=list(tbl1._c0)
+    letter=list(tbl1._c4)
+
+    union =zip(number,letter)
+    union=list(union)
+    union=sorted(union)
+
+    prueba=[]
+    rta=[(k, prueba.append([y for (x,y) in union if x == k])) for k in dict(union).keys()]
+    num= [row[0] for row in rta]
+    prueba2=[]
+    for item in prueba:
+      x = sorted(list(item))
+      prueba2.append(x)
+    prueba3=[]
+    for item in prueba2:
+      x = ",".join(map(str, item))
+      prueba3.append(x)
+
+    respuesta = pd.DataFrame({"_c0": num,"_c4": prueba3})
+
 
 
     """
@@ -245,10 +266,50 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    return respuesta
 
 
 def pregunta_12():
+
+    letter= [list(x) for x in tbl2._c5a]
+    numb= [str(x) for x in tbl2._c5b]
+
+    letras3=[]
+    for item in letter:
+      x = "".join(map(str, item))
+      letras3.append(x)
+    letras3
+
+    union =zip(letras3,numb)
+    union=list(union)
+
+    combi=[]
+    for item in union:
+      x = ":".join(map(str, item))
+      combi.append(x)
+
+
+    number=list(tbl2._c0)
+
+    union2 =zip(number,combi)
+    union2=list(union2)
+
+    prueba=[]
+    rta=[(k, prueba.append([y for (x,y) in union2 if x == k])) for k in dict(union2).keys()]
+    numeros= [row[0] for row in rta]
+    prueba2=[]
+    for item in prueba:
+      x = sorted(list(item))
+      prueba2.append(x)
+    prueba3=[]
+    for item in prueba2:
+      x = ",".join(map(str, item))
+      prueba3.append(x)
+
+    respuesta = pd.DataFrame({"_c0": numeros,"_c5": prueba3})
+
+
+
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
     la columna _c5a y _c5b (unidos por ':') de la tabla `tbl2.tsv`.
@@ -263,7 +324,7 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    return respuesta
 
 
 def pregunta_13():

@@ -165,7 +165,7 @@ def pregunta_09():
     fecha_edit = [line.split("-") for line in fecha_edit]
     fecha_edit = [row[:1] for row in fecha_edit]
     respuesta=tbl0.assign(year=fecha_edit)
-    
+    respuesta = respuesta.squeeze()
 
 
     """
@@ -186,6 +186,7 @@ def pregunta_09():
 
 
 def pregunta_10():
+
     """
     Construya una tabla que contenga _c1 y una lista separada por ':' de los valores de
     la columna _c2 para el archivo `tbl0.tsv`.

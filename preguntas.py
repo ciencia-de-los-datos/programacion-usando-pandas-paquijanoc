@@ -140,7 +140,8 @@ def pregunta_07():
 
 
 def pregunta_08():
-    respuesta=tbl0.assign(suma0=tbl0._c0 + tbl0._c2)
+    x=tbl0.assign(suma=tbl0._c0 + tbl0._c2)
+    respuesta = x.squeeze()
     """
     Agregue una columna llamada `suma` con la suma de _c0 y _c2 al archivo `tbl0.tsv`.
 
@@ -159,6 +160,8 @@ def pregunta_08():
 
 
 def pregunta_09():
+
+
     """
     Agregue el año como una columna al archivo `tbl0.tsv`.
 

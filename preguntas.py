@@ -76,6 +76,7 @@ def pregunta_04():
     """
 
     respuesta= tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.mean,})
+    respuesta = respuesta.squeeze()
     return respuesta
 
 
@@ -94,6 +95,8 @@ def pregunta_05():
     Name: _c2, dtype: int64
     """
     respuesta=tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.max,})
+    respuesta = respuesta.squeeze()
+    
     return respuesta
 
 

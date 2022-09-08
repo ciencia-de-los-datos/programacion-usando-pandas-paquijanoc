@@ -7,7 +7,9 @@ Este archivo contiene las preguntas que se van a realizar en el laboratorio.
 Utilice los archivos `tbl0.tsv`, `tbl1.tsv` y `tbl2.tsv`, para resolver las preguntas.
 
 """
+
 import pandas as pd
+import numpy as np
 
 tbl0 = pd.read_csv("tbl0.tsv", sep="\t")
 tbl1 = pd.read_csv("tbl1.tsv", sep="\t")
@@ -15,6 +17,8 @@ tbl2 = pd.read_csv("tbl2.tsv", sep="\t")
 
 
 def pregunta_01():
+
+    respuesta = tbl0.shape[0]
     """
     ¿Cuál es la cantidad de filas en la tabla `tbl0.tsv`?
 
@@ -22,7 +26,7 @@ def pregunta_01():
     40
 
     """
-    return
+    return respuesta
 
 
 def pregunta_02():
@@ -33,10 +37,13 @@ def pregunta_02():
     4
 
     """
-    return
+    respuesta = tbl0.shape[1]
+    return respuesta
 
 
 def pregunta_03():
+
+    respuesta = tbl0.groupby('_c1').size()
     """
     ¿Cuál es la cantidad de registros por cada letra de la columna _c1 del archivo
     `tbl0.tsv`?
@@ -50,7 +57,9 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return
+    
+
+    return respuesta
 
 
 def pregunta_04():
@@ -65,7 +74,10 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
+
+    respuesta= tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.mean,})
+    respuesta = respuesta.squeeze()
+    return respuesta
 
 
 def pregunta_05():
@@ -82,10 +94,20 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    respuesta=tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.max,})
+    respuesta = respuesta.squeeze()
+    
+    return respuesta
 
 
 def pregunta_06():
+
+    tabla1=tbl1.groupby('_c4').size()
+    diccio=dict(tabla1)
+    lista1=list(diccio.keys())
+    listaMayusc = [x.upper() for x in lista1]
+    listaMayusc.sort()
+    respuesta=listaMayusc
     """
     Retorne una lista con los valores unicos de la columna _c4 de del archivo `tbl1.csv`
     en mayusculas y ordenados alfabéticamente.
@@ -94,10 +116,13 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+
+    return respuesta
 
 
 def pregunta_07():
+    x=tbl0.groupby("_c1", as_index=True,).agg({"_c2": np.sum,})
+    respuesta = x.squeeze()
     """
     Calcule la suma de la _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
 
@@ -110,10 +135,13 @@ def pregunta_07():
     E    67
     Name: _c2, dtype: int64
     """
-    return
+
+    return respuesta
 
 
 def pregunta_08():
+    x=tbl0.assign(suma=tbl0._c0 + tbl0._c2)
+    respuesta = x.squeeze()
     """
     Agregue una columna llamada `suma` con la suma de _c0 y _c2 al archivo `tbl0.tsv`.
 
@@ -128,10 +156,18 @@ def pregunta_08():
     39   39   E    5  1998-01-26    44
 
     """
-    return
+    return respuesta
 
 
 def pregunta_09():
+
+    fecha=tbl0._c3
+    fecha=list(dict(fecha).values())
+    fecha_edit = [line.split("-") for line in fecha]
+    fecha_edit = [(row[0]) for row in fecha_edit]
+    respuesta=tbl0.assign(year=fecha_edit)
+
+
     """
     Agregue el año como una columna al archivo `tbl0.tsv`.
 
@@ -146,10 +182,34 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """
-    return
+    return respuesta
 
 
 def pregunta_10():
+
+    letter=list(tbl0._c1)
+    number=list(tbl0._c2)
+
+    union =zip(letter,number)
+    union=list(union)
+    union=sorted(union)
+
+    prueba=[]
+    rta=[(k, prueba.append([y for (x,y) in union if x == k])) for k in dict(union).keys()]
+    letras= [row[0] for row in rta]
+    prueba2=[]
+    for item in prueba:
+      x = sorted(list(item))
+      prueba2.append(x)
+    prueba3=[]
+    for item in prueba2:
+      x = ":".join(map(str, item))
+      prueba3.append(x)
+
+    respuesta = pd.DataFrame({"_c1": letras, "_c2": prueba3})
+
+    respuesta.set_index(['_c1'], inplace = True)
+
     """
     Construya una tabla que contenga _c1 y una lista separada por ':' de los valores de
     la columna _c2 para el archivo `tbl0.tsv`.
@@ -163,10 +223,34 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    return respuesta
 
 
 def pregunta_11():
+
+    number=list(tbl1._c0)
+    letter=list(tbl1._c4)
+
+    union =zip(number,letter)
+    union=list(union)
+    union=sorted(union)
+
+    prueba=[]
+    rta=[(k, prueba.append([y for (x,y) in union if x == k])) for k in dict(union).keys()]
+    num= [row[0] for row in rta]
+    prueba2=[]
+    for item in prueba:
+      x = sorted(list(item))
+      prueba2.append(x)
+    prueba3=[]
+    for item in prueba2:
+      x = ",".join(map(str, item))
+      prueba3.append(x)
+
+    respuesta = pd.DataFrame({"_c0": num,"_c4": prueba3})
+
+
+
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
     la columna _c4 del archivo `tbl1.tsv`.
@@ -182,10 +266,50 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    return respuesta
 
 
 def pregunta_12():
+
+    letter= [list(x) for x in tbl2._c5a]
+    numb= [str(x) for x in tbl2._c5b]
+
+    letras3=[]
+    for item in letter:
+      x = "".join(map(str, item))
+      letras3.append(x)
+    letras3
+
+    union =zip(letras3,numb)
+    union=list(union)
+
+    combi=[]
+    for item in union:
+      x = ":".join(map(str, item))
+      combi.append(x)
+
+
+    number=list(tbl2._c0)
+
+    union2 =zip(number,combi)
+    union2=list(union2)
+
+    prueba=[]
+    rta=[(k, prueba.append([y for (x,y) in union2 if x == k])) for k in dict(union2).keys()]
+    numeros= [row[0] for row in rta]
+    prueba2=[]
+    for item in prueba:
+      x = sorted(list(item))
+      prueba2.append(x)
+    prueba3=[]
+    for item in prueba2:
+      x = ",".join(map(str, item))
+      prueba3.append(x)
+
+    respuesta = pd.DataFrame({"_c0": numeros,"_c5": prueba3})
+
+
+
     """
     Construya una tabla que contenga _c0 y una lista separada por ',' de los valores de
     la columna _c5a y _c5b (unidos por ':') de la tabla `tbl2.tsv`.
@@ -200,10 +324,20 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    return respuesta
 
 
 def pregunta_13():
+
+    suma=tbl2.groupby("_c0", as_index=True,).agg({"_c5b": np.sum,})
+
+    tablanew=tbl0.assign(_c5b=suma)
+
+    x=tablanew.groupby("_c1", as_index=True,).agg({"_c5b": np.sum,})
+    respuesta = x.squeeze()
+
+
+
     """
     Si la columna _c0 es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`, compute la
     suma de tbl2._c5b por cada valor en tbl0._c1.
@@ -217,4 +351,4 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    return respuesta

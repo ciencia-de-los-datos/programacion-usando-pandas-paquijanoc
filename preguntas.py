@@ -192,6 +192,7 @@ def pregunta_10():
 
     union =zip(letter,number)
     union=list(union)
+    union=sorted(union)
 
     prueba=[]
     rta=[(k, prueba.append([y for (x,y) in union if x == k])) for k in dict(union).keys()]
@@ -205,8 +206,7 @@ def pregunta_10():
       x = ":".join(map(str, item))
       prueba3.append(x)
 
-    df1 = pd.DataFrame({"_c1": letras, "_c2": prueba3})
-    respuesta=df1.sort_values(by=["_c1"],ascending=[True],)
+    respuesta = pd.DataFrame({"_c1": letras, "_c2": prueba3})
 
 
 
